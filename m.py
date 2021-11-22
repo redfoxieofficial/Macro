@@ -1,7 +1,8 @@
 import time
 from pynput import keyboard
-from pynput.keyboard import Controller
-from pynput import mouse
+from pynput.keyboard import Controller as ControllerKeyboard
+from pynput.mouse import Button, Controller
+
 
 print("Mouse or Keyboard?")
 print("***")
@@ -13,7 +14,8 @@ saniye = float(saniye)
 while choice == "1" or "2":
     if choice == "1":
         mouse = Controller()
-        print('The current pointer position is {0}'.format(mouse.position))
+        position = mouse.position
+        print('The current pointer position is {0}'.format(position))
         question = input("Do you want to set a mouse position (Y/N): ")
         if question.upper() == "Y":
             x = input("X: ")
@@ -28,19 +30,19 @@ while choice == "1" or "2":
         lr = input("L/R: ")
         if lr.upper() == "L":
             while True:
-                mouse.press(mouse.Button.left)
-                mouse.release(mouse.Button.left)
+                mouse.press(Button.left)
+                mouse.release(Button.left)
                 time.sleep(float(saniye))
         elif lr.upper() == "R":
             while True:
-                mouse.press(mouse.Button.Right)
-                mouse.release(mouse.Button.Right)
+                mouse.press(Button.Right)
+                mouse.release(Button.Right)
                 time.sleep(float(saniye))
         else:
             print("Invalid Choice")
     if choice == "2":
         tus = input("Which key do you want to press?: ")
-        keyboard = Controller()
+        keyboard = ControllerKeyboard()
         while True:
             keyboard.press(tus)
             keyboard.release(tus)
